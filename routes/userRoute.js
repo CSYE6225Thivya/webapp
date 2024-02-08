@@ -15,6 +15,7 @@ router.get("/v1/user/self", checkPayloadAndQueryParams, checkDBConnection, basic
 
 // Route to update user information
 
+
 router.put("/v1/user/self", checkDBConnection, basicAuth, updateUser );
 
 export default router;
