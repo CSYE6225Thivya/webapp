@@ -68,9 +68,17 @@ jobs:
           echo "DB=${{ secrets.DB }}" >> .env
           echo "HOST=${{ secrets.HOST }}" >> .env
           echo "DIALECT=${{ secrets.DIALECT }}" >> .env
- 
-      - name: Run npm Start
-        run: npm start
+      
+      - name: Start the application
+        run: |
+            npm start &
+        
+      - name: Wait for the application to be ready
+        run: |
+            sleep 10
+            until curl -s http://localhost:3000; do
+              sleep 5
+            done
  
       - name: Run Tests
         run: npm test
