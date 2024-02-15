@@ -71,7 +71,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      # - name: Start the application
+      - name: Start the application
         run: |
             npm start &
         
