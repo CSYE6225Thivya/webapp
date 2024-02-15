@@ -53,6 +53,17 @@ jobs:
           echo "DB_USER: $DB_USER"
           echo "DB_PASSWORD: $DB_PASSWORD"
           echo "DB_NAME: $DB_NAME"
+
+      - name: Set up environment variables
+        run: |
+          echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+          echo "MYSQL_HOST=${{ secrets.MYSQL_HOST }}" >> $GITHUB_ENV
+          echo "DB_USER=${{ secrets.DB_USER}}" > secrets/secrets.env
+          echo "PASSWORD=${{ secrets.PASSWORD }}" >> secrets/secrets.env
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> secrets/secrets.env
+          echo "MYSQL_HOST=${{ secrets.MYSQL_HOST }}" >> secrets/secrets.env
  
       - name: Run npm Start
         run: npm start
