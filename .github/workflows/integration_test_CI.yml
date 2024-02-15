@@ -44,6 +44,14 @@ jobs:
  
       - name: Install Dependencies
         run: npm install
+      
+      - name: Debug
+        run: |
+          echo "MYSQL_DIALECT: $MYSQL_DIALECT"
+          echo "MYSQL_HOST: $MYSQL_HOST"
+          echo "DB_USER: $DB_USER"
+          echo "DB_PASSWORD: $DB_PASSWORD"
+          echo "DB_NAME: $DB_NAME"
  
       - name: Run npm Start
         run: npm start
