@@ -62,6 +62,8 @@ jobs:
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
           echo "DB=${{ secrets.DB }}" >> $GITHUB_ENV
           echo "MYSQL_HOST=${{ secrets.MYSQL_HOST }}" >> $GITHUB_ENV
+
+
           echo "DB_USER=${{ secrets.DB_USER}}" > .env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
           echo "DB=${{ secrets.DB }}" >> .env
@@ -71,17 +73,19 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Start the application
-        run: |
-            npm start &
+      # - name: Start the application
+      #   run: |
+      #       npm start &
         
-      - name: Wait for the application to be ready
-        run: |
-            sleep 10
-            until curl -s http://localhost:8080; do
-              sleep 5
-            done
- 
+      # - name: Wait for the application to be ready
+      #   run: |
+      #       sleep 10
+      #       until curl -s http://localhost:8080; do
+      #         sleep 5
+      #       done
+      - name: Run npm start
+        run: npm start
+        
       - name: Run Tests
         run: npm test
  
