@@ -12,7 +12,7 @@ describe("User Endpoint Integration Tests", () => {
         last_name: "test",
         username: "test@example.com",
         password: "test",
-      });
+      }).timeout(5000);
     // Expect response status code to be 201
     expect(createUserResponse.status).to.equal(201);
     const userId = createUserResponse.body.id;
