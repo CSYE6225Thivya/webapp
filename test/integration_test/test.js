@@ -10,7 +10,7 @@ describe("User Endpoint Integration Tests", () => {
       .send({
         first_name: "test",
         last_name: "test",
-        username: "test@example.com",
+        username: "test1@example.com",
         password: "test",
       }).timeout(5000);
     // Expect response status code to be 201
@@ -18,7 +18,7 @@ describe("User Endpoint Integration Tests", () => {
     const userId = createUserResponse.body.id;
     // Authenticate
     const authHeader = `Basic ${Buffer.from(
-      "test@example.com:test"
+      "test1@example.com:test"
     ).toString("base64")}`;
     // Send a GET request
     const getUserResponse = await request(app)
@@ -32,7 +32,7 @@ describe("User Endpoint Integration Tests", () => {
   it("should update an account and validate the changes with GET", async () => {
     // Authenticate
     const authHeader = `Basic ${Buffer.from(
-      "test@example.com:test"
+      "test1@example.com:test"
     ).toString("base64")}`;
     // Send a PUT request
     const updateUserResponse = await request(app)
