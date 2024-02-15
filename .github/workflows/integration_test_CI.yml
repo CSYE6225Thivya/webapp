@@ -54,6 +54,9 @@ jobs:
           echo "DB_PASSWORD: $DB_PASSWORD"
           echo "DB_NAME: $DB_NAME"
 
+      - name: Create secrets directory
+        run: mkdir -p secrets
+
       - name: Set up environment variables
         run: |
           echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
