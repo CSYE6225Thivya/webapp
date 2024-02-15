@@ -6,9 +6,7 @@ import { Buffer } from "buffer";
 // Create Sequelize instance to connect to DB
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
-  // dialect: dbConfig.dialect,
-  dialect: mysql,
-
+  dialect: dbConfig.dialect,
   logging: false,
   define: {
     timestamps: false, 
