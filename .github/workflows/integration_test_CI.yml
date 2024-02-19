@@ -11,6 +11,7 @@ env:
   DB_USER: ${{ secrets.DB_USER }}
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
   DB: ${{ secrets.DB }}
+  GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
 
 jobs:
   build:
@@ -93,4 +94,20 @@ jobs:
 
       - name: Validate Packer template
         run: packer validate packer-config/custom_image.pkr.hcl
+ 
+      - name: Build custom image
+        run: packer build packer-config/custom_image.pkr.hcl
+
+      - name: Packer Build
+        uses: hashicorp/packer-github-actions@master
+        with:
+         command: build
+         arguments: |
+          -var=GCP_PROJECT_ID="ancient-vortex-411817"
+          -var=source_image="custom-image"
+          -var=zone="us-east1-b"
+          -var=ssh_username="centos"
+          -var=credentials=${{ secrets.GCP_SA_KEY }}
+         target: packer-config/custom_image.pkr.hcl
+        
  
