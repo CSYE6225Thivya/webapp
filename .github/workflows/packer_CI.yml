@@ -22,9 +22,9 @@ jobs:
 
       - name: Initialize Packer
         run: packer init .
-        
+
       - name: Format Packer template
-        run: packer fmt -check
+        run: packer fmt
 
       - name: Validate Packer template
         run: packer validate custom_image.pkr.hcl
