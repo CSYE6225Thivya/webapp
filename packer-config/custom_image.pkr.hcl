@@ -49,12 +49,19 @@ build {
     source      = "webapp.zip"
     destination = "webapp.zip"
   }
- 
+  provisioner "file" {
+    source      = "packer-config/webapp.service"
+    destination = "/tmp/webapp.service"
+  }
   provisioner "shell" {
     script = "packer-config/install_dependencies.sh"
   }
   provisioner "shell" {
      script = "packer-config/create_user.sh"
+  }
+
+   provisioner "shell" {
+     script = "packer-config/configure_systemd.sh"
   }
  
  
