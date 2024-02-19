@@ -77,8 +77,8 @@ jobs:
       - name: Install Packer
         run: |
           curl -fsSL https://releases.hashicorp.com/packer/1.7.5/packer_1.7.5_linux_amd64.zip -o packer.zip
-          unzip packer.zip
-          sudo mv packer /usr/local/bin/
+          unzip packer.zip -d /tmp
+          sudo mv /tmp/packer /usr/bin/packer
           packer --version
 
       - name: Create webapp.zip
@@ -86,11 +86,11 @@ jobs:
             zip -r webapp.zip .
 
       - name: Initialize Packer
-        run: packer init packer/packer-config/custom_image.pkr.hcl
+        run: packer init packer-config/custom_image.pkr.hcl
 
       - name: Format Packer template
-        run: packer fmt packer/packer-config/custom_image.pkr.hcl
+        run: packer fmt packer-config/custom_image.pkr.hcl
 
       - name: Validate Packer template
-        run: packer validate packer/packer-config/custom_image.pkr.hcl
+        run: packer validate packer-config/custom_image.pkr.hcl
  
