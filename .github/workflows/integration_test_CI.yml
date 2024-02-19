@@ -73,4 +73,17 @@ jobs:
 
       - name: Run Tests
         run: npm test
+
+      - name: Install Packer
+        run: |
+          curl -fsSL https://releases.hashicorp.com/packer/1.7.5/packer_1.7.5_linux_amd64.zip -o packer.zip
+          unzip packer.zip
+          sudo mv packer /usr/local/bin/
+          packer version
+
+      - name: Format Packer template
+        run: packer fmt -check
+
+      - name: Validate Packer template
+        run: packer validate custom_image.json
  

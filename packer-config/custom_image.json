@@ -1,0 +1,29 @@
+{
+  "builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "ancient-vortex-411817",
+      "source_image": "centos-stream-8-v20240110",
+      "image_name": "custom-image",
+      "zone": "us-east1-b",
+      "ssh_username": "centos",
+      "network": "default"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "/Users/thivya/Desktop/Cloud/Assignment4/webapp",
+      "destination": "/tmp/"
+    },
+    {
+      "type": "shell",
+      "script": "install_dependencies.sh"
+    },
+    {
+      "type": "shell",
+      "script": "create_user.sh"
+    }
+   
+  ]
+}
