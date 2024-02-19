@@ -46,7 +46,7 @@ build {
   sources = ["source.googlecompute.custom-image"]
  
   provisioner "file" {
-    source      = "/Users/thivya/Desktop/Cloud/Assignment4/webapp.zip"
+    source      = "/Users/thivya/Desktop/Cloud/Assignment4/webapp"
     destination = "/tmp/"
   }
  
