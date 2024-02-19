@@ -20,8 +20,11 @@ jobs:
           sudo mv packer /usr/local/bin/
           packer version
 
+      - name: Initialize Packer
+        run: packer init .
+        
       - name: Format Packer template
         run: packer fmt -check
 
       - name: Validate Packer template
-        run: packer validate custom_image.json
+        run: packer validate custom_image.pkr.hcl
