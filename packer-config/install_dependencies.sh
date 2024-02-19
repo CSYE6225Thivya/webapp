@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sudo yum install -y unzip
-sudo unzip /tmp/webapp.zip -d /
 
 #Install MySQL
 sudo rpm -Uvh mysql80-community-release-el8-1.noarch.rpm
@@ -19,3 +17,11 @@ sudo mysql -u root -e "GRANT ALL PRIVILEGES ON api_db.* TO 'user'@'localhost';"
 sudo dnf module list nodejs
 sudo dnf module enable -y nodejs:20
 sudo dnf install -y npm
+
+
+sudo yum install zip unzip -y
+unzip webapp.zip -d webapp
+
+cd ~/webapp/
+sudo npm install
+cd ..

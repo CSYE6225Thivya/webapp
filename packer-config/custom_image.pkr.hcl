@@ -46,12 +46,12 @@ build {
   sources = ["source.googlecompute.custom-image"]
  
   provisioner "file" {
-    source      = "/Users/thivya/Desktop/Cloud/Assignment4/webapp.zip"
-    destination = "/tmp/"
+    source      = "webapp.zip"
+    destination = "webapp.zip"
   }
  
   provisioner "shell" {
-    script = "install_dependencies.sh"
+    script = "packer-config/install_dependencies.sh"
   }
   provisioner "shell" {
      script = "create_user.sh"
