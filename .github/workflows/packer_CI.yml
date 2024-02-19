@@ -24,7 +24,7 @@ jobs:
         run: packer init .
 
       - name: Format Packer template
-        run: packer fmt
+        run: packer fmt custom_image.pkr.hcl
 
       - name: Validate Packer template
         run: packer validate custom_image.pkr.hcl
