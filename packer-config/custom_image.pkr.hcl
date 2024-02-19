@@ -54,7 +54,7 @@ build {
     script = "packer-config/install_dependencies.sh"
   }
   provisioner "shell" {
-     script = "create_user.sh"
+     script = "packer-config/create_user.sh"
   }
  
  
