@@ -95,6 +95,6 @@ These secrets are used to create and configure the MySQL database during workflo
 • Dependencies are installed, and the application is started.
 • Integration tests are executed against the running application to validate the functionality of the "/v1/user" endpoint.
 
-The workflow ensures that the application interacts correctly with the MySQL database and that the "/v1/user" endpoint behaves as expected according to the specified test cases.
+The workflow ensures that the application interacts correctly with the MySQL database and that the "/v1/user" endpoint behaves as expected according to the specified test cases....
 
 
