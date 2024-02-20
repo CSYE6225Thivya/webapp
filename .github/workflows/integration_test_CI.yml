@@ -45,6 +45,11 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+      - name: Stop MySQL
+        run: |
+
+          sudo systemctl stop mysql
+         
 
       - name: Start the application
         run: |
