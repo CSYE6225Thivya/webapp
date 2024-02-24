@@ -56,7 +56,7 @@ variable DB_USER {
  timestamp = regex_replace(formatdate("YYYY-MM-DD-hh-mm-ss", timestamp()), "[- TZ:]", "")
  }
 
-source "googlecompute" "custom-image" {
+sourceeeee "googlecompute" "custom-image" {
   project_id   = var.project_id
   source_image_family = var.source_image_family
   zone         = var.zone
