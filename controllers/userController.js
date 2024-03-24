@@ -2,6 +2,18 @@ import { User } from "../models/healthzModel.js";
 import nameValidator from "validator";
 import emailValidator from "email-validator";
 import logger from "../logger/logger.js";
+import { PubSub } from '@google-cloud/pubsub';
+
+// const pubsub = new PubSub();
+const pubsub = new PubSub({
+  projectId: 'tf-gcp-infra-415001', // Replace with your GCP project ID
+});
+
+// Define the name of the Pub/Sub topic
+const topicName = 'verify_email'; // Replace with your Pub/Sub topic name
+
+// Retrieve the topic instance
+const topic = pubsub.topic(topicName);
 
 
 // Function to get user information
@@ -16,6 +28,9 @@ const getUserInfo = async (req, res) => {
     const user = await User.findByPk(req.user.id, {
       attributes: { exclude: ["password"] },
     });
+    if (!user.isVerified) {
+      return res.status(403).json({ message: 'User account is not verified' });
+    }
     res.json(user);
   } catch (error) {
     logger.error("Error retrieving user information:", error);
@@ -123,6 +138,21 @@ const createUserPost = async (req, res) => {
     username,
   });
 
+  // Publish a message to the Pub/Sub topic
+  const messagePayload = {
+    id: newUser.id,
+    first_name: newUser.first_name,
+    last_name: newUser.last_name,
+    username: newUser.username,
+    account_created: newUser.account_created,
+    account_updated: newUser.account_updated,
+  };
+
+  // Convert the message payload to a Buffer
+  const messageBuffer = Buffer.from(JSON.stringify(messagePayload));
+
+  // Publish the message to the topic
+  await topic.publish(messageBuffer);
   
   logger.info("New user created successfully", { username: req.body.username });
   // Return the created user
@@ -216,6 +246,9 @@ const updateUser = async (req, res) => {
     if (!user) {
       logger.error("User not found");
       return res.status(404).json({ message: "User not found" });
+    }
+    if (!user.isVerified) {
+      return res.status(403).json({ message: 'User account is not verified' });
     }
     // Check if the user is updating their own account
     if (user.id !== userId) {

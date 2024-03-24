@@ -72,6 +72,9 @@ app.use("/healthz", (req, res, next) => {
 // Route for healthz
 app.get("/healthz", healthzRoute);
 
+// Route for verify email
+// app.get("/verify-email", verifyEmailRoute);
+
 // Middleware to handle invalid methods for non-existent endpoints
 
 const allowedEndpoints = {
