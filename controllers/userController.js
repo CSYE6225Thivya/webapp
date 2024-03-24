@@ -28,9 +28,9 @@ const getUserInfo = async (req, res) => {
     const user = await User.findByPk(req.user.id, {
       attributes: { exclude: ["password"] },
     });
-    if (!user.isVerified) {
-      return res.status(403).json({ message: 'User account is not verified' });
-    }
+    // if (!user.isVerified) {
+    //   return res.status(403).json({ message: 'User account is not verified' });
+    // }
     res.json(user);
   } catch (error) {
     logger.error("Error retrieving user information:", error);
@@ -247,9 +247,9 @@ const updateUser = async (req, res) => {
       logger.error("User not found");
       return res.status(404).json({ message: "User not found" });
     }
-    if (!user.isVerified) {
-      return res.status(403).json({ message: 'User account is not verified' });
-    }
+    // if (!user.isVerified) {
+    //   return res.status(403).json({ message: 'User account is not verified' });
+    // }
     // Check if the user is updating their own account
     if (user.id !== userId) {
       logger.warn("User can only update his/her own account");
